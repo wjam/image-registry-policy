@@ -2,7 +2,7 @@
 .PHONY := clean all fmt coverage build
 
 go_files := $(shell find . -path ./vendor -prune -o -path '*/testdata' -prune -o -type f -name '*.go' -print)
-commands := $(notdir $(shell find cmd/* -type d -depth 0))
+commands := $(notdir $(shell find cmd/* -maxdepth 0 -type d))
 local_bins := $(addprefix bin/,$(commands))
 
 clean:
