@@ -11,7 +11,7 @@ require (
 	github.com/slok/kubewebhook/v2 v2.1.0
 	github.com/spf13/viper v1.7.1
 	github.com/stretchr/testify v1.7.0
-	golang.org/x/tools v0.1.2
+	golang.org/x/tools v0.1.3
 	k8s.io/api v0.21.1
 	k8s.io/apimachinery v0.21.1
 )
