@@ -1,7 +1,7 @@
 package main
 
 import (
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"testing"
 	"time"
@@ -17,7 +17,7 @@ func TestConfigure_reloadsConfiguration(t *testing.T) {
 	dir := t.TempDir()
 
 	file := filepath.Join(dir, "config.yaml")
-	err := ioutil.WriteFile(file, []byte(`
+	err := os.WriteFile(file, []byte(`
 log_level: INFO
 allowed_registries:
   - example.org
@@ -31,7 +31,7 @@ allowed_registries:
 	assert.Equal(t, logrus.InfoLevel, log.Level)
 	assert.Equal(t, []string{"example.org", "bbc.co.uk"}, validator.registries)
 
-	err = ioutil.WriteFile(file, []byte(`
+	err = os.WriteFile(file, []byte(`
 log_level: DEBUG
 allowed_registries:
   - example.test

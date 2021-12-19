@@ -35,7 +35,7 @@ func (v *Valid) Validate(_ context.Context, _ *model.AdmissionReview, obj metav1
 		if v, ok := image.(reference.Tagged); ok && v.Tag() == "latest" {
 			return &validating.ValidatorResult{
 				Valid:   false,
-				Message: fmt.Sprintf("Latest version is not allowed"),
+				Message: "Latest version is not allowed",
 			}, nil
 		}
 	}

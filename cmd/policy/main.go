@@ -47,12 +47,12 @@ func app() error {
 			WithField("keyFile", keyFile).
 			WithField("port", port).
 			Info("Serving HTTPS")
-		if err := http.ListenAndServeTLS(":8000", certFile, keyFile, handler); err != nil {
+		if err := http.ListenAndServeTLS(port, certFile, keyFile, handler); err != nil {
 			return err
 		}
 	} else {
 		log.WithField("port", port).Info("Serving HTTP")
-		if err := http.ListenAndServe(":8000", handler); err != nil {
+		if err := http.ListenAndServe(port, handler); err != nil {
 			return err
 		}
 	}

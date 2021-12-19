@@ -17,6 +17,10 @@ bin/ko: $(shell find ./tools/ko -type f)
 	# Building ko
 	@cd ./tools/ko && go generate ./tools.go
 
+bin/golangci-lint: $(shell find ./tools/golangci-lint -type f)
+	# Building golangci-lint
+	@cd ./tools/golangci-lint && go generate ./tools.go
+
 bin/.vendor: go.mod go.sum
 	# Downloading modules...
 	@go mod download
@@ -31,8 +35,8 @@ fmt: bin/.generate $(go_files) bin/goimports
 	# Formatting files...
 	@bin/goimports -w $(go_files)
 
-bin/.vet: bin/.generate $(go_files)
-	go vet  ./...
+bin/.vet: bin/golangci-lint bin/.generate $(go_files)
+	bin/golangci-lint run --enable bodyclose --enable goimports
 	@touch bin/.vet
 
 bin/.fmtcheck: bin/goimports bin/.generate $(go_files)
